@@ -9,6 +9,7 @@ class _InputPageState extends State<InputPage> {
 
   String _nombre='';
   String _email='';
+  TextEditingController _textInputFechaController=new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,9 @@ class _InputPageState extends State<InputPage> {
           _crearCampoEmail(),
           SizedBox(),
           _crearCampoPassword(),
-           SizedBox(),
+           SizedBox(height: 20,), 
+          _crearCampoFecha(),
+           SizedBox(height: 20,),
           _crearContenedor(),
         ],
 
@@ -36,7 +39,6 @@ class _InputPageState extends State<InputPage> {
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         counterText: 'Letras:${_nombre.length}',
-        helperText: 'Nombre',
         hintText: 'Descripcion del campo',
         labelText: 'Nombre',
         icon: Icon(Icons.account_circle_rounded),
@@ -56,7 +58,6 @@ class _InputPageState extends State<InputPage> {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         counterText: 'Letras:${_email.length}',
-        helperText: 'Email',
         hintText: 'Descripcion del campo',
         labelText: 'Email',
         icon: Icon(Icons.email),
@@ -75,7 +76,6 @@ Widget _crearCampoPassword(){
     return TextField(
       obscureText: true,
       decoration: InputDecoration(
-        helperText: 'Password',
         hintText: 'Descripcion del campo',
         labelText: 'Password',
         prefixIcon: Icon(Icons.lock_outline_rounded),
@@ -85,6 +85,35 @@ Widget _crearCampoPassword(){
     );
   }
 
+Widget _crearCampoFecha(){
+    return TextField(
+      enableInteractiveSelection: false,
+      controller: _textInputFechaController,
+      decoration: InputDecoration(
+      
+        hintText: 'Descripcion del campo',
+        labelText: 'Edad',
+        prefixIcon: Icon(Icons.date_range),
+        suffixIcon: Icon(Icons.date_range_outlined),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0))
+      ),
+      onTap:(){
+        FocusScope.of(context).requestFocus(new FocusNode());
+      _mostrarSelectorFecha(context);
+      },
+    );
+  }
+
+void _mostrarSelectorFecha(BuildContext context)async{
+
+DateTime fecha= await showDatePicker(
+  context: context, 
+  initialDate: DateTime.now(), 
+  firstDate: DateTime(2000),
+  lastDate: DateTime(2025),
+  locale: Locale('es','ES'));
+   _textInputFechaController.text=fecha.toString();
+}
 
 Widget _crearContenedor(){
   return ListTile(
