@@ -10,7 +10,7 @@ class _InputPageState extends State<InputPage> {
   String _nombre='';
   String _email='';
   TextEditingController _textInputFechaController=new TextEditingController();
-
+  List<String> _listaItem=['Opcion 1','Opcion 2','Opcion 3','Opcion 4'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +26,8 @@ class _InputPageState extends State<InputPage> {
           _crearCampoPassword(),
            SizedBox(height: 20,), 
           _crearCampoFecha(),
+           SizedBox(height: 20,),
+          _crearDropdown(),
            SizedBox(height: 20,),
           _crearContenedor(),
         ],
@@ -71,7 +73,29 @@ class _InputPageState extends State<InputPage> {
       },
     );
   }
+Widget _crearDropdown(){
+   return DropdownButton(
 
+     items: <DropdownMenuItem<String>>[
+       DropdownMenuItem(
+        
+       child: Text('data'),
+       value: 'item',
+       ),
+         DropdownMenuItem(
+       child: Text('data'),
+       value: 'item',
+       ),
+         DropdownMenuItem(
+       child: Text('data'),
+       value: 'item',
+       )
+     ],
+     onChanged: (opt){
+        
+     },
+    );
+}
 Widget _crearCampoPassword(){
     return TextField(
       obscureText: true,
