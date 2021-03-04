@@ -11,6 +11,8 @@ class _InputPageState extends State<InputPage> {
   String _email='';
   TextEditingController _textInputFechaController=new TextEditingController();
   List<String> _listaItem=['Opcion 1','Opcion 2','Opcion 3','Opcion 4'];
+  String _opcionSeleccionada='Opcion 1';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,28 +76,38 @@ class _InputPageState extends State<InputPage> {
     );
   }
 Widget _crearDropdown(){
-   return DropdownButton(
-
-     items: <DropdownMenuItem<String>>[
-       DropdownMenuItem(
-        
-       child: Text('data'),
-       value: 'item',
-       ),
-         DropdownMenuItem(
-       child: Text('data'),
-       value: 'item',
-       ),
-         DropdownMenuItem(
-       child: Text('data'),
-       value: 'item',
-       )
+   return Row(
+     mainAxisSize: MainAxisSize.max,
+     children: [
+       Icon(Icons.accessibility_sharp),
+       SizedBox(width: 20,),
+       DropdownButton(
+         value: _opcionSeleccionada,
+         items: _getOpciones(),
+         onChanged: (opt){
+           setState(() {
+          _opcionSeleccionada=opt;
+           });
+         },
+        ),
      ],
-     onChanged: (opt){
-        
-     },
+   );
+}
+List<DropdownMenuItem<String>> _getOpciones(){
+List<DropdownMenuItem<String>> items=new List();
+_listaItem.forEach((element) {
+  items.add(DropdownMenuItem(
+    child: Text(element) ,
+    onTap: (){
+    },
+    value: element,
+    )
     );
 }
+);
+return items;
+}
+
 Widget _crearCampoPassword(){
     return TextField(
       obscureText: true,
