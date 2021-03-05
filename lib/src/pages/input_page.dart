@@ -6,8 +6,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
-  String _nombre='';
+ String _nombre='';
   String _email='';
   TextEditingController _textInputFechaController=new TextEditingController();
   List<String> _listaItem=['Opcion 1','Opcion 2','Opcion 3','Opcion 4'];
